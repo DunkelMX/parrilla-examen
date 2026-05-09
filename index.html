@@ -1,0 +1,3077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examen Parrilla — Menús de Degustación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --celeste:  #74ACDF;
+  --celeste-dark: #4a87be;
+  --gold:     #F0A500;
+  --cream:    #FEFAF4;
+  --cream-2:  #F5EFE6;
+  --charcoal: #1C1C1E;
+  --text:     #1a1a1a;
+  --muted:    #666;
+  --border:   #DDD5C8;
+  --red:      #B03020;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lato', system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--charcoal);
+  border-top: 6px solid var(--celeste);
+  border-bottom: 6px solid var(--celeste);
+  padding: 24px 32px;
+  text-align: center;
+}
+header .sol { font-size: 2rem; color: var(--gold); display: block; margin-bottom: 6px; }
+header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+header p {
+  font-size: 0.83rem;
+  color: #aaa;
+  margin-top: 5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── TABS ── */
+.tab-bar {
+  background: var(--charcoal);
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 16px;
+  border-bottom: 3px solid var(--celeste);
+  overflow-x: auto;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: #999;
+  padding: 13px 20px;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: #fff; }
+.tab-btn[aria-selected="true"] {
+  color: #fff;
+  border-bottom-color: var(--celeste);
+}
+
+/* ── CONTENT ── */
+.tab-panel { display: none; padding: 40px 32px; max-width: 860px; margin: 0 auto; }
+.tab-panel.active { display: block; }
+
+/* ── TYPOGRAPHY ── */
+.tab-panel h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+.tab-panel h2 {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--celeste-dark);
+  margin-top: 44px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.tab-panel h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 18px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tab-panel p { margin-bottom: 12px; font-size: 0.97rem; }
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 36px 0;
+}
+
+/* ── HISTORIA paragraphs (class added by JS) ── */
+.historia {
+  background: #fff;
+  border-left: 4px solid var(--celeste);
+  padding: 12px 16px;
+  margin: 14px 0 18px 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 0.97rem;
+  color: #333;
+  line-height: 1.75;
+}
+.historia strong { font-style: normal; color: var(--celeste-dark); }
+
+/* ── TABLES ── */
+.scroll-x { overflow-x: auto; margin: 14px 0 22px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  min-width: 360px;
+}
+thead tr { background: var(--charcoal); color: #fff; }
+thead th { padding: 10px 14px; text-align: left; font-weight: 600; letter-spacing: 0.03em; }
+tbody tr:nth-child(even) { background: var(--cream-2); }
+tbody tr:nth-child(odd)  { background: #fff; }
+tbody td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody td strong { color: var(--celeste-dark); font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* Roll tables — smaller font */
+.roll-table table { font-size: 0.78rem; min-width: 640px; }
+.roll-table thead tr { background: #333; }
+
+/* ── LISTS ── */
+ol, ul { margin: 8px 0 14px 22px; font-size: 0.93rem; }
+li { margin-bottom: 4px; }
+
+/* Pitch bullets */
+.tab-panel ul li strong { color: var(--red); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+/* ── PRINT ── */
+@media print {
+  .tab-bar { display: none; }
+  .tab-panel { display: block !important; page-break-before: always; padding: 24px; }
+  .tab-panel:first-of-type { page-break-before: avoid; }
+  header .sol { display: none; }
+}
+
+@media (max-width: 600px) {
+  header h1 { font-size: 1.4rem; }
+  .tab-panel { padding: 24px 16px; }
+  .tab-btn { padding: 10px 12px; font-size: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="sol">&#9728;</span>
+  <h1>Examen Parrilla</h1>
+  <p>Menús de Degustación &nbsp;·&nbsp; 15 comensales &nbsp;·&nbsp; 4 cocineros &nbsp;·&nbsp; 6 horas</p>
+</header>
+
+<nav class="tab-bar" role="tablist">
+  <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-0" id="tab-0" onclick="showTab(0)">1 — Clásico Austral</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-1" id="tab-1" onclick="showTab(1)">2 — Fuego y Campo</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" onclick="showTab(2)">3 — El Festín</button>
+  <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" onclick="showTab(3)">4 — El Viajero</button>
+</nav>
+
+<div class="tab-panel active" id="panel-0" role="tabpanel" aria-labelledby="tab-0">
+<h1 id="menú-1-clásico-austral">Menú 1 — Clásico Austral</h1>
+<p><strong>Concepto:</strong> El fuego como protagonista. Cada plato es
+una etapa del ritual — desde la primera llama hasta el corte que la
+cierra. Sin fusión ni concepto forzado: solo el asado rioplatense
+llevado a su forma más precisa.</p>
+<hr />
+<h2 id="aperitivo-choripán">Aperitivo — Choripán</h2>
+<p><strong>Historia:</strong> El fuego acaba de encenderse. El chorizo
+en la parrilla no es todavía el plato — es la señal. En el Río de la
+Plata, el ritual del asado empieza aquí, con el olor del chorizo
+dorándo, el pan esperando, y todos entendiendo sin que nadie lo diga que
+lo que viene después va a merecer la espera.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chorizos</td>
+<td>4 pza</td>
+<td>15 pza</td>
+</tr>
+<tr>
+<td>Pan baguette o flauta</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Chimichurri</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Parrilla a fuego indirecto,
+chorizos 20 min. 2. Fuego directo 10 min para marcar. 3. Tostar pan en
+parrilla. 4. Montar con chimichurri.</p>
+<hr />
+<h2
+id="primera-entrada-tuétano-a-la-parrilla-con-aceite-ahumado">Primera
+Entrada — Tuétano a La Parrilla Con Aceite Ahumado</h2>
+<p><strong>Historia:</strong> El fuego lleva unos minutos ardiendo y ya
+encontró su ritmo. Es el momento de ir más adentro. El tuétano es la
+médula del hueso — la parte más íntima, más grasosa, la que el animal
+reservó para sí. El calor la funde desde adentro y hay que atraparla en
+ese instante exacto, antes de que enfríe y cambie de decisión.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Huesos canoa (tuétano)</td>
+<td>3 pza</td>
+<td>8 pza</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Cilantro picado</td>
+<td>50 g</td>
+<td>150 g</td>
+</tr>
+<tr>
+<td>Cebolla blanca picada</td>
+<td>50 g</td>
+<td>150 g</td>
+</tr>
+<tr>
+<td>Limón real</td>
+<td>3 pza</td>
+<td>8 pza</td>
+</tr>
+<tr>
+<td><strong>Aceite ahumado</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>200 ml</td>
+<td>400 ml</td>
+</tr>
+<tr>
+<td>Brasa encendida</td>
+<td>1 pza</td>
+<td>1 pza</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Tuétano:</strong> 1. Canal hacia arriba,
+fuego directo medio-alto, 8–12 min hasta burbujeo. 2. Salar al retirar.
+Servir inmediatamente con cebolla, cilantro, limón y aceite ahumado.</p>
+<p><strong>Procedimiento — Aceite ahumado:</strong> 1. Frasco de vidrio
+a la mitad con aceite. 2. Introducir brasa pequeña encendida con
+cuidado. Tapar de inmediato. 3. Esperar hasta que desaparezca el humo
+blanco.</p>
+<hr />
+<h2 id="segunda-entrada-chinchulines-con-salsa-criolla">Segunda Entrada
+— Chinchulines Con Salsa Criolla</h2>
+<p><strong>Historia:</strong> El fuego lleva rato ardiendo y ahora pide
+algo a cambio. Los chinchulines no se apresuran — exigen entre cuarenta
+y cincuenta minutos de cada lado, sin moverse. El hervor previo en agua
+y leche les quita las grasas pesadas y los vuelve más limpios al
+paladar. Lo que la parrilla termina de hacer es construir una textura
+que ningún corte noble puede replicar. El tiempo no es el enemigo; es el
+ingrediente.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chinchulines</td>
+<td>700 g</td>
+<td>2.5 kg</td>
+</tr>
+<tr>
+<td>Agua (hervor)</td>
+<td>1 lt</td>
+<td>4 lt</td>
+</tr>
+<tr>
+<td>Leche (hervor)</td>
+<td>1 lt</td>
+<td>4 lt</td>
+</tr>
+<tr>
+<td>Hojas de laurel</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td><strong>Salsa criolla</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Jitomates</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Cebolla blanca</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Morrón rojo</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Pimiento verde</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>½ cabeza</td>
+<td>1½ cabezas</td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>¼ atado</td>
+<td>¾ atado</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>300 ml</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>150 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Chinchulines (opción B — hervor
+previo):</strong> 1. Cortar en trozos de 15–20 cm. 2. Hervir en partes
+iguales de agua y leche con laurel, 1½ h. 3. Enfriar, enjuagar con agua
+fría para retirar sedimentos. 4. Parrilla caliente: 10–15 min por lado
+hasta crocante. 5. Servir con limón y salsa criolla.</p>
+<p><strong>Procedimiento — Salsa criolla:</strong> 1. Brunoise de todos
+los vegetales. Picar perejil. 2. Mezclar con aceite, vinagre, sal y
+pimienta. 3. Refrigerar mínimo 30 min antes de servir.</p>
+<hr />
+<h2
+id="intermedio-betabel-asado-con-queso-ricotta-berros-miel-de-agave-y-chile-piquín">Intermedio
+— Betabel Asado Con Queso Ricotta, Berros, Miel De Agave Y Chile
+Piquín</h2>
+<p><strong>Historia:</strong> Después del humo y la grasa, llega la
+tierra. El betabel no viene del fuego — viene del suelo que lo rodea. Su
+dulzor se concentra en la brasa, el ricotta lo refresca, los berros lo
+amargan levemente, el chile piquín lo despierta. Es un instante vegetal
+en medio del ritual — no un descanso, sino el silencio que hace que lo
+que sigue tenga más mérito.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Betabel</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Queso ricotta</td>
+<td>2 cdas</td>
+<td>250 g</td>
+</tr>
+<tr>
+<td>Berros</td>
+<td>½ taza</td>
+<td>2 tazas (100 g)</td>
+</tr>
+<tr>
+<td>Miel de agave</td>
+<td>1 cda</td>
+<td>4 cdas</td>
+</tr>
+<tr>
+<td>Chile piquín seco</td>
+<td>¼ cdita</td>
+<td>1 cdita</td>
+</tr>
+<tr>
+<td>Aceite de oliva</td>
+<td>1 cda</td>
+<td>4 cdas</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Pelar, envolver en aluminio, asar
+a fuego directo 400°F / 200°C por 40 min. 2. Cortar en rodajas, marcar
+en parrilla muy caliente 2 min por lado. 3. Montar: berros con aceite →
+betabel → ricotta → miel → chile piquín.</p>
+<hr />
+<h2
+id="plato-fuerte-picaña-a-las-brasas-con-cremoso-de-papa-y-trufa">Plato
+Fuerte — Picaña a Las Brasas Con Cremoso De Papa Y Trufa</h2>
+<p><strong>Historia — Picaña:</strong> El fuego llevaba horas esperando
+este momento. La picaña llega con su capa de grasa intacta — esa grasa
+que la protege y la baña desde adentro mientras la parrilla trabaja por
+afuera. Las achuras prepararon el paladar, el betabel despejó el camino.
+Ahora solo quedan grasa abajo, fuego medio, paciencia, y después el
+silencio del cuchillo cortando contra la fibra.</p>
+<p><strong>Historia — Cremoso:</strong> El cremoso no compite con el
+corte — lo enmarca. Unas gotas de aceite de trufa sobre una papa
+trabajada hasta la seda dicen lo que el corte ya dijo: que este menú fue
+cuidado hasta el final.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Picaña</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Picaña</td>
+<td>1 pza (~1.5 kg)</td>
+<td>2 pza (~2.5 kg c/u)</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Cremoso de Papa y Trufa</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Papa</td>
+<td>2 kg</td>
+<td>7 kg</td>
+</tr>
+<tr>
+<td>Leche entera</td>
+<td>300 ml</td>
+<td>1 lt</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>200 g</td>
+<td>700 g</td>
+</tr>
+<tr>
+<td>Aceite de trufa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Picaña:</strong> 1. Salar 15 min antes. 2.
+Grasa hacia abajo, fuego medio. Primer lado 30–40 min. 3. Dar vuelta,
+segundo lado más rápido. 4. Reposar 10 min. Cortar en láminas finas
+contra la fibra.</p>
+<p><strong>Procedimiento — Cremoso:</strong> 1. Cocer papas en agua con
+sal. 2. Calentar leche y mantequilla juntas. 3. Pasar papa caliente por
+prensa. 4. Incorporar la mezcla de leche poco a poco. 5. Ajustar
+consistencia, salpimentar. 6. Aceite de trufa al momento del
+servicio.</p>
+<hr />
+<h2 id="postre-alfajores-de-maicena-con-chocolate">Postre — Alfajores De
+Maicena Con Chocolate</h2>
+<p><strong>Historia:</strong> El ritual tiene un final y este es él.
+Después de las brasas, el aceite ahumado y la paciencia de los
+chinchulines, el alfajor llega sin fuego — hecho en casa, con tiempo,
+con las manos. La maicena produce una galleta que se desarma en la boca
+antes de que empiece el dulce de leche. El chocolate cierra todo. No hay
+improviso aquí: el alfajor es el final que el ritual siempre tuvo,
+aunque nadie lo anunció.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Galleta</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Harina</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Maicena</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Polvo para hornear</td>
+<td>¾ cdita</td>
+<td>2 cditas</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Azúcar glass</td>
+<td>100 g</td>
+<td>240 g</td>
+</tr>
+<tr>
+<td>Yemas</td>
+<td>2 pza</td>
+<td>5 pza</td>
+</tr>
+<tr>
+<td>Esencia de vainilla</td>
+<td>½ cdita</td>
+<td>1 cdita</td>
+</tr>
+<tr>
+<td>Ralladura de limón</td>
+<td>½ pza</td>
+<td>1 pza</td>
+</tr>
+<tr>
+<td><strong>Relleno y cobertura</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dulce de leche repostero</td>
+<td>250 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Chocolate de cobertura</td>
+<td>200 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>20 g</td>
+<td>50 g</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Batir mantequilla con azúcar glass
+hasta cremar. 2. Agregar yemas de a una, vainilla y ralladura de limón.
+3. Tamizar harina, maicena y polvo para hornear. Incorporar en dos
+partes sin amasar de más. 4. Envolver en film, refrigerar 30 min. 5.
+Estirar a 5 mm, cortar círculos de ~5 cm de diámetro. 6. Hornear a
+170°C, 10–12 min. No deben dorarse — quedan pálidas. 7. Enfriar
+completamente sobre rejilla. 8. Rellenar con dulce de leche, unir pares.
+Refrigerar 15 min para fijar. 9. Fundir chocolate con mantequilla a baño
+maría. 10. Bañar alfajores, dejar solidificar sobre papel encerado.</p>
+<hr />
+<h2 id="de-mesa-chimichurri">De Mesa — Chimichurri</h2>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (~8p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cabeza de ajo</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Orégano fresco</td>
+<td>½ atado</td>
+<td>1 atado</td>
+</tr>
+<tr>
+<td>Perejil fresco</td>
+<td>1 atado</td>
+<td>2 atados</td>
+</tr>
+<tr>
+<td>Ají molido seco</td>
+<td>10 g</td>
+<td>20 g</td>
+</tr>
+<tr>
+<td>Pimentón</td>
+<td>10 g</td>
+<td>20 g</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>100 ml</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>200 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> Picar ajo y hierbas fino. Mezclar
+todo. Refrigerar mínimo 1 h.</p>
+<hr />
+<h2 id="pitch-a-jueces">Pitch a Jueces</h2>
+<ul>
+<li><strong>Progresión sin rellenos:</strong> cada plato tiene una
+función — las achuras abren, el betabel limpia, la picaña cierra. Ningún
+paso es decorativo.</li>
+<li><strong>Técnica de fuego pura:</strong> la picaña se evalúa sin
+marinadas ni aderezos — solo el dominio del calor directo y el punto de
+cocción.</li>
+<li><strong>Los chinchulines con hervor previo demuestran criterio
+técnico:</strong> no es el camino fácil — es el correcto. Más limpio,
+más crocante, más digerible.</li>
+<li><strong>El cremoso de trufa eleva sin competir:</strong> la
+guarnición es elegante, pero nunca protagonista.</li>
+</ul>
+<hr />
+<h2 id="roll-4-cocineros-6-horas">Roll — 4 Cocineros, 6 Horas</h2>
+<div class="scroll-x"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hora</th>
+<th>C1 — Parrilla</th>
+<th>C2 — Guarniciones</th>
+<th>C3 — Salsas y Fríos</th>
+<th>C4 — Entradas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H0:00–H0:30</td>
+<td>Encender fuego, mise en place parrilla</td>
+<td>Mise en place, pelar papas</td>
+<td>Mise en place, lavar vegetales</td>
+<td>Cortar chinchulines 15-20 cm</td>
+</tr>
+<tr>
+<td>H0:30–H1:00</td>
+<td>Construir brasa, evaluar zonas</td>
+<td>Preparar aceite ahumado</td>
+<td>Iniciar chimichurri. Batir masa alfajores, refrigerar 30 min</td>
+<td>Iniciar hervor chinchulines (agua + leche + laurel)</td>
+</tr>
+<tr>
+<td>H1:00–H2:00</td>
+<td>Mantener fuego</td>
+<td>Cocer papas para cremoso</td>
+<td>Terminar chimichurri, iniciar salsa criolla. Estirar y hornear
+galletas alfajor (170°C, 10–12 min)</td>
+<td>Monitorear hervor chinchulines (1½ h total)</td>
+</tr>
+<tr>
+<td>H2:00–H3:00</td>
+<td>Control temperatura</td>
+<td>Hacer cremoso, incorporar leche y mantequilla</td>
+<td>Terminar salsa criolla, refrigerar. Enfriar galletas, rellenar con
+dulce de leche, bañar chocolate, refrigerar</td>
+<td>Retirar chinchulines del hervor, enjuagar, enfriar</td>
+</tr>
+<tr>
+<td>H3:00–H4:00</td>
+<td>Colocar picañas grasa abajo (fuego medio)</td>
+<td>Mantener cremoso caliente</td>
+<td>Preparar betabeles en aluminio, poner al fuego</td>
+<td>Colocar chinchulines en parrilla (10-15 min/lado)</td>
+</tr>
+<tr>
+<td>H4:00–H4:30</td>
+<td>Monitorear picañas</td>
+<td>Revisar cremoso</td>
+<td>Monitorear betabeles</td>
+<td>Dar vuelta chinchulines</td>
+</tr>
+<tr>
+<td>H4:30–H5:00</td>
+<td>Colocar chorizos en parrilla</td>
+<td>Calentar cremoso</td>
+<td>Marcar betabeles a fuego muy alto</td>
+<td>Verificar chinchulines, mantener calientes</td>
+</tr>
+<tr>
+<td>H5:00–H5:15</td>
+<td>Servir <strong>Choripán</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Coordinar salida</td>
+</tr>
+<tr>
+<td>H5:15–H5:25</td>
+<td>Colocar tuétano (8-12 min)</td>
+<td>—</td>
+<td>—</td>
+<td>Montar platos chinchulines</td>
+</tr>
+<tr>
+<td>H5:25–H5:40</td>
+<td>Servir <strong>Tuétano</strong></td>
+<td>—</td>
+<td>Servir salsa criolla</td>
+<td>Servir <strong>Chinchulines</strong></td>
+</tr>
+<tr>
+<td>H5:40–H5:50</td>
+<td>Dar vuelta picañas si falta</td>
+<td>—</td>
+<td>Montar y servir <strong>Betabel</strong></td>
+<td>Coordinar</td>
+</tr>
+<tr>
+<td>H5:50–H6:00</td>
+<td>Reposar picañas, cortar en láminas</td>
+<td>Servir <strong>Cremoso</strong></td>
+<td>Chimichurri de mesa</td>
+<td>Servir <strong>Picaña</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="tab-panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
+<h1 id="menú-2-fuego-y-campo">Menú 2 — Fuego Y Campo</h1>
+<p><strong>Concepto:</strong> La brasa como técnica transversal. En este
+menú, cada ingrediente entra al fuego como una cosa y sale como otra —
+el tomate deja de ser tomate, la calabaza carameliza, el colágeno se
+vuelve seda. La transformación es el hilo que conecta cada plato con el
+siguiente.</p>
+<hr />
+<h2 id="aperitivo-choripán">Aperitivo — Choripán</h2>
+<p><strong>Historia:</strong> La primera transformación del menú es la
+más simple. El chorizo entra crudo y sale dorado, la tripa revienta
+levemente, la grasa se funde y el pan se tuesta. El fuego apenas empieza
+a mostrar lo que sabe hacer. Lo que viene después es lo mismo, llevado
+mucho más lejos.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chorizos</td>
+<td>4 pza</td>
+<td>15 pza</td>
+</tr>
+<tr>
+<td>Pan baguette o flauta</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Chimichurri</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Fuego indirecto 20 min, fuego
+directo 10 min para marcar. 2. Tostar pan en parrilla. Montar con
+chimichurri.</p>
+<hr />
+<h2
+id="primera-entrada-ensalada-caprese-de-tomate-ahumado-con-queso-mozzarella-y-salsa-de-ajo">Primera
+Entrada — Ensalada Caprese De Tomate Ahumado Con Queso Mozzarella Y
+Salsa De Ajo</h2>
+<p><strong>Historia:</strong> Ahora la transformación es radical. El
+tomate entra como ingrediente italiano — fresco, ácido, conocido — y
+sale como algo distinto: el humo de nogal le quita la acidez cruda y le
+da profundidad de brasa. El mozzarella, en frío sobre hielo, se ahúma
+sin fundirse, sin perder su forma. El mismo fuego, aplicado con más
+precisión, produce resultados que el primer chorizo no podía
+anticipar.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tomates bola</td>
+<td>2 pza</td>
+<td>8 pza</td>
+</tr>
+<tr>
+<td>Mozzarella fresco</td>
+<td>100 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Arúgula</td>
+<td>100 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Sal ahumada SMP</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Aceite de oliva</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Albahaca fresca</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Salsa de ajo SMP</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Virutas de nogal</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Asador a 350°F / 180°C con virutas
+de nogal remojadas sobre la brasa. 2. Tomates en rebanadas gruesas con
+aceite, sellar y ahumar 5 min. 3. Mozzarella en recipiente sobre hielo
+en el asador 5 min — ahúma sin derretirse. 4. Montar: arúgula con limón
+y aceite → tomate y mozzarella intercalados → salsa de ajo y
+albahaca.</p>
+<hr />
+<h2
+id="segunda-entrada-tuétano-con-calabaza-asada-tripa-de-res-y-queso-cotija">Segunda
+Entrada — Tuétano Con Calabaza Asada, Tripa De Res Y Queso Cotija</h2>
+<p><strong>Historia:</strong> Aquí el fuego trabaja en dos direcciones
+al mismo tiempo. El tuétano se licúa — pierde su forma sólida para
+volverse algo más, intenso y urgente, que hay que servir y comer antes
+de que cambie de opinión. La calabaza hace lo opuesto: se endurece
+afuera y se vuelve seda adentro, caramelizando su azúcar natural. Mismo
+fuego, dos transformaciones completamente distintas en el mismo
+plato.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tuétano</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Huesos canoa</td>
+<td>3 pza</td>
+<td>8 pza</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td><strong>Calabaza con tripa</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Calabazas</td>
+<td>2 pza</td>
+<td>8 pza</td>
+</tr>
+<tr>
+<td>Queso Cotija / Sardo</td>
+<td>100 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Mayonesa</td>
+<td>125 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Chicharrones de tripa de res</td>
+<td>200 g</td>
+<td>800 g</td>
+</tr>
+<tr>
+<td>Rub rojo SMP</td>
+<td>1 cda</td>
+<td>4 cdas</td>
+</tr>
+<tr>
+<td>Aceite de oliva</td>
+<td>10 ml</td>
+<td>40 ml</td>
+</tr>
+<tr>
+<td>Morrón amarillo</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Tuétano:</strong> 1. Canal hacia arriba,
+fuego directo medio-alto, 8–12 min hasta burbujeo. 2. Salar, servir
+inmediatamente con limón.</p>
+<p><strong>Procedimiento — Calabaza:</strong> 1. Mitad de calabaza con
+aceite y rub, fuego directo 5 min. Retirar. 2. Morrón entero a fuego
+directo 3 min. Pelar, juliana. 3. Calentar tripa en parrilla, picar. 4.
+Montar: calabaza + mayonesa + juliana de morrón + tripa + Cotija
+rallado.</p>
+<hr />
+<h2 id="intermedio-chinchulines-con-salsa-criolla">Intermedio —
+Chinchulines Con Salsa Criolla</h2>
+<p><strong>Historia:</strong> Hay transformaciones que toman tiempo. Los
+chinchulines hervidos en agua y leche ya entregaron sus grasas saturadas
+al líquido — lo que llega a la parrilla es una tripa más limpia, más
+honesta. El fuego termina el trabajo en diez o quince minutos por lado,
+construyendo la capa crocante que los hace irreemplazables. Es la
+transformación que más paciencia pide y que menos se puede
+apresurar.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chinchulines</td>
+<td>700 g</td>
+<td>2.5 kg</td>
+</tr>
+<tr>
+<td>Agua (hervor)</td>
+<td>1 lt</td>
+<td>4 lt</td>
+</tr>
+<tr>
+<td>Leche (hervor)</td>
+<td>1 lt</td>
+<td>4 lt</td>
+</tr>
+<tr>
+<td>Hojas de laurel</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td><strong>Salsa criolla</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Jitomates</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Cebolla blanca</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Morrón rojo</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Pimiento verde</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>½ cabeza</td>
+<td>1½ cabezas</td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>¼ atado</td>
+<td>¾ atado</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>300 ml</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>150 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Chinchulines (hervor previo):</strong> 1.
+Cortar en trozos de 15–20 cm. 2. Hervir en partes iguales de agua y
+leche con laurel, 1½ h. 3. Enfriar, enjuagar con agua fría. 4. Parrilla
+caliente: 10–15 min por lado. 5. Servir con limón y salsa criolla.</p>
+<p><strong>Procedimiento — Salsa criolla:</strong> 1. Brunoise de todos
+los vegetales, picar perejil. 2. Mezclar con aceite, vinagre, sal y
+pimienta. Refrigerar 30 min.</p>
+<hr />
+<h2
+id="plato-fuerte-costillar-a-la-parrilla-con-cremoso-de-humita">Plato
+Fuerte — Costillar a La Parrilla Con Cremoso De Humita</h2>
+<p><strong>Historia — Costillar:</strong> La transformación final, y la
+más larga. Cuatro horas de fuego bajo convierten el colágeno del
+costillar en algo que no tiene nombre exacto — no es grasa, no es carne,
+es la textura que hace que se separe del hueso sin esfuerzo. No se
+apura. No se empuja. Se le da el tiempo que pide, y cuando llega, tiene
+el sabor de todo ese tiempo acumulado.</p>
+<p><strong>Historia — Humita:</strong> El maíz también se transforma. La
+mitad licuada vuelve al todo y le da cuerpo sin quitarle textura. Es el
+cremoso que cierra el menú con acento norteño — Argentina antes de
+Buenos Aires, el campo antes de la ciudad.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Costillar</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Costillar</td>
+<td>2 kg</td>
+<td>6 kg (2 piezas)</td>
+</tr>
+<tr>
+<td>Agua</td>
+<td>1 lt</td>
+<td>3 lt</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>50 g</td>
+<td>150 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>4 dientes</td>
+<td>12 dientes</td>
+</tr>
+<tr>
+<td>Romero</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Cremoso de Humita</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Elotes</td>
+<td>8 pza</td>
+<td>28 pza</td>
+</tr>
+<tr>
+<td>Cebolla morada</td>
+<td>2 pza</td>
+<td>7 pza</td>
+</tr>
+<tr>
+<td>Pimiento rojo</td>
+<td>2 pza</td>
+<td>7 pza</td>
+</tr>
+<tr>
+<td>Jitomates</td>
+<td>4 pza</td>
+<td>14 pza</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>100 g</td>
+<td>350 g</td>
+</tr>
+<tr>
+<td>Crema</td>
+<td>300 ml</td>
+<td>1 lt</td>
+</tr>
+<tr>
+<td>Sal, pimienta, nuez moscada</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Costillar:</strong> 1. Salmuera: disolver sal
+en agua con ajo y romero. Bañar 30 min. 2. Fuego indirecto bajo
+(120–140°C), hueso abajo, 3–4 h. 3. Últimos 20 min: fuego directo para
+marcar. 4. Reposar 10 min, cortar entre costillas.</p>
+<p><strong>Procedimiento — Cremoso de Humita:</strong> 1. Desgranar
+elotes. 2. Sofreír cebolla y pimiento en mantequilla hasta
+transparentar. 3. Agregar elote y crema, cocinar 15 min. 4. Licuar la
+mitad, reincorporar. 5. Terminar con jitomate en cubos, sal, pimienta y
+nuez moscada.</p>
+<hr />
+<h2 id="postre-alfajores-de-maicena-con-chocolate">Postre — Alfajores de
+Maicena con Chocolate</h2>
+<p><strong>Historia:</strong> La última transformación del menú ocurre
+sin fuego. La maicena — el mismo maíz que en la humita fue el campo — se
+convierte en una galleta que no dora, no se apresura, se deshace. El
+dulce de leche y el chocolate hacen lo que las brasas no podían: cerrar
+el menú con algo frío, dulce y hecho con paciencia distinta. La
+transformación no necesita siempre calor.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Galleta</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Harina</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Maicena</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Polvo para hornear</td>
+<td>¾ cdita</td>
+<td>2 cditas</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Azúcar glass</td>
+<td>100 g</td>
+<td>240 g</td>
+</tr>
+<tr>
+<td>Yemas</td>
+<td>2 pza</td>
+<td>5 pza</td>
+</tr>
+<tr>
+<td>Esencia de vainilla</td>
+<td>½ cdita</td>
+<td>1 cdita</td>
+</tr>
+<tr>
+<td>Ralladura de limón</td>
+<td>½ pza</td>
+<td>1 pza</td>
+</tr>
+<tr>
+<td><strong>Relleno y cobertura</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dulce de leche repostero</td>
+<td>250 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Chocolate de cobertura</td>
+<td>200 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>20 g</td>
+<td>50 g</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Batir mantequilla con azúcar glass
+hasta cremar. 2. Agregar yemas de a una, vainilla y ralladura de limón.
+3. Tamizar harina, maicena y polvo para hornear. Incorporar en dos
+partes sin amasar de más. 4. Envolver en film, refrigerar 30 min. 5.
+Estirar a 5 mm, cortar círculos de ~5 cm de diámetro. 6. Hornear a
+170°C, 10–12 min. No deben dorarse — quedan pálidas. 7. Enfriar
+completamente sobre rejilla. 8. Rellenar con dulce de leche, unir pares.
+Refrigerar 15 min para fijar. 9. Fundir chocolate con mantequilla a baño
+maría. 10. Bañar alfajores, dejar solidificar sobre papel encerado.</p>
+<hr />
+<h2 id="de-mesa-chimichurri-y-aceite-ahumado">De Mesa — Chimichurri Y
+Aceite Ahumado</h2>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (~8p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chimichurri</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>1 cabeza</td>
+<td>2 cabezas</td>
+</tr>
+<tr>
+<td>Orégano fresco</td>
+<td>½ atado</td>
+<td>1 atado</td>
+</tr>
+<tr>
+<td>Perejil fresco</td>
+<td>1 atado</td>
+<td>2 atados</td>
+</tr>
+<tr>
+<td>Ají molido seco</td>
+<td>10 g</td>
+<td>20 g</td>
+</tr>
+<tr>
+<td>Pimentón</td>
+<td>10 g</td>
+<td>20 g</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>100 ml</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>200 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Aceite ahumado</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>200 ml</td>
+<td>400 ml</td>
+</tr>
+<tr>
+<td>Brasa encendida</td>
+<td>1 pza</td>
+<td>1 pza</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="pitch-a-jueces">Pitch a Jueces</h2>
+<ul>
+<li><strong>La brasa como hilo conductor:</strong> el tomate, el
+tuétano, la calabaza, los chinchulines y el costillar pasan todos por el
+fuego y ninguno sale igual que entró. El menú completo es una
+demostración de lo que la brasa puede hacer con ingredientes
+distintos.</li>
+<li><strong>El costillar con humita tiene identidad propia:</strong> el
+maíz cremoso ancla el plato fuerte en la tradición norteña del cono sur,
+no en la parrilla porteña genérica.</li>
+<li><strong>La caprese ahumada demuestra criterio:</strong> convertir un
+clásico italiano en algo parrillero sin perder su esencia es una
+decisión editorial, no un accidente.</li>
+<li><strong>El menú equilibra animal y vegetal</strong> en cada paso —
+nunca la carne aplasta lo vegetal.</li>
+</ul>
+<hr />
+<h2 id="roll-4-cocineros-6-horas">Roll — 4 Cocineros, 6 Horas</h2>
+<div class="scroll-x"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hora</th>
+<th>C1 — Parrilla</th>
+<th>C2 — Guarniciones</th>
+<th>C3 — Salsas y Fríos</th>
+<th>C4 — Entradas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H0:00–H0:30</td>
+<td>Encender fuego, evaluar zonas</td>
+<td>Mise en place, desgranar elotes</td>
+<td>Lavar vegetales, mise en place</td>
+<td>Cortar chinchulines 15-20 cm</td>
+</tr>
+<tr>
+<td>H0:30–H1:00</td>
+<td>Construir brasa, zona indirecta</td>
+<td>Sofreír base de humita</td>
+<td>Iniciar chimichurri. Batir masa alfajores, refrigerar 30 min</td>
+<td>Iniciar hervor chinchulines (agua + leche + laurel)</td>
+</tr>
+<tr>
+<td>H1:00–H2:00</td>
+<td>Colocar costillar a fuego indirecto bajo — crítico, necesita
+3-4h</td>
+<td>Terminar cremoso de humita</td>
+<td>Terminar chimichurri, iniciar salsa criolla. Estirar y hornear
+galletas alfajor (170°C, 10–12 min)</td>
+<td>Monitorear hervor chinchulines (1½ h total)</td>
+</tr>
+<tr>
+<td>H2:00–H3:00</td>
+<td>Monitorear costillar, bañar con salmuera</td>
+<td>Mantener cremoso caliente</td>
+<td>Terminar salsa criolla, refrigerar. Enfriar galletas, rellenar con
+dulce de leche, bañar chocolate, refrigerar</td>
+<td>Retirar chinchulines, enjuagar, enfriar</td>
+</tr>
+<tr>
+<td>H3:00–H4:00</td>
+<td>Verificar punto costillar</td>
+<td>Mantener guarnición</td>
+<td>Preparar mise en place caprese, remojar virutas nogal</td>
+<td>Colocar chinchulines en parrilla (10-15 min/lado)</td>
+</tr>
+<tr>
+<td>H4:00–H4:30</td>
+<td>Subir temperatura costillar para marcar final</td>
+<td>Calentar cremoso</td>
+<td>Ahumar tomates y mozzarella</td>
+<td>Dar vuelta chinchulines, verificar punto</td>
+</tr>
+<tr>
+<td>H4:30–H5:00</td>
+<td>Marcar costillar a fuego directo (20 min), reposar</td>
+<td>Mantener caliente</td>
+<td>Montar caprese</td>
+<td>Colocar chorizos en parrilla</td>
+</tr>
+<tr>
+<td>H5:00–H5:15</td>
+<td>Servir <strong>Choripán</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Coordinar</td>
+</tr>
+<tr>
+<td>H5:15–H5:30</td>
+<td>—</td>
+<td>—</td>
+<td>Servir <strong>Caprese</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>H5:30–H5:40</td>
+<td>Colocar tuétano (8-12 min), preparar calabaza al fuego (5 min)</td>
+<td>—</td>
+<td>Servir salsa criolla</td>
+<td>Servir <strong>Chinchulines</strong></td>
+</tr>
+<tr>
+<td>H5:40–H5:50</td>
+<td>Servir <strong>Tuétano + Calabaza</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Coordinar</td>
+</tr>
+<tr>
+<td>H5:50–H6:00</td>
+<td>Cortar costillar entre costillas</td>
+<td>Servir <strong>Cremoso de Humita</strong></td>
+<td>Salsas de mesa</td>
+<td>Servir <strong>Costillar</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="tab-panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2">
+<h1 id="menú-3-el-festín">Menú 3 — El Festín</h1>
+<p><strong>Concepto:</strong> La abundancia como argumento. Cada plato
+suma al que viene antes — las achuras se acumulan, la presencia crece,
+hasta que el único movimiento posible es la pausa. Y después del
+silencio, el final que todo lo anterior anunciaba.</p>
+<hr />
+<h2 id="aperitivo-choripán-morcilla-y-salchicha-parrillera">Aperitivo —
+Choripán, Morcilla y Salchicha Parrillera</h2>
+<p><strong>Historia:</strong> El festín no se anuncia — se declara. Tres
+piezas en la parrilla al mismo tiempo, en lugar de una. El chorizo, la
+morcilla y la salchicha no son introducción al menú — son el menú
+presentándose sin reservas desde el primer momento. Después de esto, el
+comensal ya sabe que la generosidad no es un accidente.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chorizos</td>
+<td>4 pza</td>
+<td>15 pza</td>
+</tr>
+<tr>
+<td>Morcillas</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Salchicha parrillera</td>
+<td>350 g</td>
+<td>1.5 kg</td>
+</tr>
+<tr>
+<td>Pan baguette</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Chimichurri</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Morcillas: parrilla caliente, 10
+min por lado, con cuidado de no romper. 2. Salchichas: 15 min por lado.
+3. Chorizos: indirecto 20 min, directo 10 min para marcar. 4. Tostar
+pan. Servir con chimichurri.</p>
+<hr />
+<h2 id="primera-entrada-chinchulines-mollejas-y-salsa-criolla">Primera
+entrada — Chinchulines, Mollejas y Salsa Criolla</h2>
+<p><strong>Historia:</strong> La abundancia gana complejidad. Donde el
+aperitivo fue declaración, este plato es argumento. Los chinchulines
+hervidos en agua y leche llegan a la parrilla ya sin sus grasas pesadas
+— el fuego solo termina de construir la capa crocante. Las mollejas
+piden otro tipo de paciencia: calor constante hasta que la costra
+exterior queda firme y el interior se vuelve cremoso. Dos texturas, dos
+tiempos, una sola idea.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chinchulines</td>
+<td>700 g</td>
+<td>2.5 kg</td>
+</tr>
+<tr>
+<td>Agua (hervor)</td>
+<td>1 lt</td>
+<td>4 lt</td>
+</tr>
+<tr>
+<td>Leche (hervor)</td>
+<td>1 lt</td>
+<td>4 lt</td>
+</tr>
+<tr>
+<td>Hojas de laurel</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td>Mollejas</td>
+<td>700 g</td>
+<td>2.5 kg</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>3 pza</td>
+<td>10 pza</td>
+</tr>
+<tr>
+<td><strong>Salsa criolla</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Jitomates</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Cebolla blanca</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Morrón rojo</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Pimiento verde</td>
+<td>200 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>½ cabeza</td>
+<td>1½ cabezas</td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>¼ atado</td>
+<td>¾ atado</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>300 ml</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>150 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Chinchulines (hervor previo):</strong> 1.
+Cortar en trozos de 15–20 cm. 2. Hervir en partes iguales de agua y
+leche con laurel, 1½ h. 3. Enfriar, enjuagar con agua fría. 4. Parrilla
+caliente: 10–15 min por lado.</p>
+<p><strong>Procedimiento — Mollejas:</strong> 1. Salar, parrilla
+caliente 25–30 min por lado hasta dorar y que la costra quede firme. 2.
+Cortar y servir inmediatamente con limón.</p>
+<p><strong>Procedimiento — Salsa criolla:</strong> 1. Brunoise de todos
+los vegetales, picar perejil. 2. Mezclar con aceite, vinagre, sal y
+pimienta. Refrigerar 30 min.</p>
+<hr />
+<h2 id="segunda-entrada-tuétano-con-aceite-ahumado">Segunda entrada —
+Tuétano con Aceite Ahumado</h2>
+<p><strong>Historia:</strong> En medio de tanta presencia, un instante
+diferente. Las achuras llevan temperatura, grasa, textura que se
+mastica. El tuétano llega fundido, suave, para bañarlo en pan con aceite
+ahumado. No es un descanso del festín — es el festín mostrando que
+también sabe ser gentil cuando quiere.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Huesos canoa (tuétano)</td>
+<td>3 pza</td>
+<td>8 pza</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>2 pza</td>
+<td>6 pza</td>
+</tr>
+<tr>
+<td>Pan tostado</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Aceite ahumado</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>200 ml</td>
+<td>400 ml</td>
+</tr>
+<tr>
+<td>Brasa encendida</td>
+<td>1 pza</td>
+<td>1 pza</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Tuétano:</strong> 1. Canal hacia arriba,
+fuego directo medio-alto, 8–12 min hasta burbujeo. 2. Salar, servir con
+pan, limón y aceite ahumado.</p>
+<p><strong>Procedimiento — Aceite ahumado:</strong> 1. Frasco a la mitad
+con aceite. Introducir brasa pequeña encendida. Tapar inmediatamente. 2.
+Esperar hasta que desaparezca el humo blanco.</p>
+<hr />
+<h2
+id="intermedio-ensalada-de-berenjena-con-verduras-tatemadas-vinagreta-antigua-y-cerveza">Intermedio
+— Ensalada de Berenjena con Verduras Tatemadas, Vinagreta Antigua y
+Cerveza</h2>
+<p><strong>Historia:</strong> El festín hace una pausa. Todo lo que vino
+antes fue intenso, graso, cálido. La berenjena tatemada llega desde el
+lado opuesto: piel carbonizada que esconde un interior sedoso, vinagreta
+de mostaza y cerveza oscura que mete acidez y frescura, queso de cabra
+que suaviza. Sin este plato, el final sería demasiado. Con él, el doble
+corte que viene tiene el espacio que necesita para llegar bien.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Berenjena</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Lechuga orejona</td>
+<td>½ pza</td>
+<td>2 pza</td>
+</tr>
+<tr>
+<td>Tomate cherry</td>
+<td>10 pza</td>
+<td>40 pza</td>
+</tr>
+<tr>
+<td>Arúgula</td>
+<td>50 g</td>
+<td>200 g</td>
+</tr>
+<tr>
+<td>Queso de cabra</td>
+<td>100 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td><strong>Vinagreta de cerveza</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mostaza antigua</td>
+<td>3 cdas</td>
+<td>12 cdas</td>
+</tr>
+<tr>
+<td>Miel de abeja</td>
+<td>1 cda</td>
+<td>4 cdas</td>
+</tr>
+<tr>
+<td>Vinagre de manzana</td>
+<td>125 ml</td>
+<td>500 ml</td>
+</tr>
+<tr>
+<td>Aceite de oliva</td>
+<td>60 ml</td>
+<td>240 ml</td>
+</tr>
+<tr>
+<td>Cerveza oscura</td>
+<td>250 ml</td>
+<td>1 lt</td>
+</tr>
+<tr>
+<td>Sal ahumada SMP</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Tatemar berenjenas directo en la
+brasa hasta que la piel se carbonice y se desprenda. 2. Tatemar lechuga
+brevemente a fuego directo. 3. Vinagreta: mezclar mostaza, miel,
+vinagre, cerveza, condimentos y aceite. 4. Montar: lechuga + arúgula +
+tomate cherry + berenjena + queso de cabra + vinagreta.</p>
+<hr />
+<h2 id="plato-fuerte-picaña-y-costillar-con-puré-de-papa-rústico">Plato
+fuerte — Picaña y Costillar con Puré de Papa Rústico</h2>
+<p><strong>Historia — Picaña y Costillar:</strong> El argumento
+concluye. La picaña es rápida, elegante, de sabor limpio — el corte que
+no necesita tiempo para decir lo que tiene que decir. El costillar es
+lento, profundo, construido en cuatro horas de fuego bajo. Juntos no se
+repiten — se responden. La abundancia tenía razón todo el tiempo.</p>
+<p><strong>Historia — Puré rústico:</strong> Las papas no van a la olla
+— van a la parrilla, envueltas en aluminio, absorbiendo el humo durante
+cuarenta y cinco minutos. Lo que sale no es un puré de cocina; es un
+puré de parrilla. La sal ahumada y el Rub rojo lo confirman: este plato
+no podría existir en otro fuego que no sea este.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Picaña</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Picaña</td>
+<td>1 pza (~1.5 kg)</td>
+<td>2 pza (~2.5 kg c/u)</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Costillar</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Costillar</td>
+<td>2 kg</td>
+<td>6 kg (2 piezas)</td>
+</tr>
+<tr>
+<td>Agua (salmuera)</td>
+<td>1 lt</td>
+<td>3 lt</td>
+</tr>
+<tr>
+<td>Sal gruesa (salmuera)</td>
+<td>50 g</td>
+<td>150 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>4 dientes</td>
+<td>12 dientes</td>
+</tr>
+<tr>
+<td>Romero</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Puré de Papa Rústico</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Papas grandes</td>
+<td>6 pza (~1.5 kg)</td>
+<td>20 pza (~5 kg)</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>150 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Crema</td>
+<td>450 g</td>
+<td>1.5 lt</td>
+</tr>
+<tr>
+<td>Romero fresco</td>
+<td>2 ramitas</td>
+<td>6 ramitas</td>
+</tr>
+<tr>
+<td>Sal ahumada SMP</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Rub rojo SMP</td>
+<td>2 cdas</td>
+<td>6 cdas</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Costillar:</strong> 1. Salmuera 30 min. Fuego
+indirecto bajo (120–140°C), hueso abajo, 3–4 h. 2. Últimos 20 min: fuego
+directo. Reposar, cortar entre costillas.</p>
+<p><strong>Procedimiento — Picaña:</strong> 1. Salar 15 min antes. Grasa
+abajo, fuego medio, 30–40 min. 2. Dar vuelta, segundo lado más rápido.
+Reposar 10 min. Cortar en láminas finas contra la fibra.</p>
+<p><strong>Procedimiento — Puré rústico:</strong> 1. Papas en cuartos
+envueltas en aluminio. Parrilla indirecta 300–400°F / 45 min. 2. Retirar
+aluminio, pasar a tazón. 3. Agregar mantequilla, crema, sal ahumada, rub
+rojo y romero. Trabajar hasta consistencia rústica.</p>
+<hr />
+<h2 id="postre-alfajores-de-maicena-con-chocolate">Postre — Alfajores de
+Maicena con Chocolate</h2>
+<p><strong>Historia:</strong> El festín no termina — se suaviza. Después
+de las achuras, el doble corte y todo lo que hubo antes, el alfajor
+llega como conclusión inevitable: tres capas, sin urgencia, sin fuego.
+El dulce de leche es argentino desde antes que el asado. El chocolate lo
+envuelve todo. Es la generosidad del menú en su forma más tranquila.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Galleta</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Harina</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Maicena</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Polvo para hornear</td>
+<td>¾ cdita</td>
+<td>2 cditas</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Azúcar glass</td>
+<td>100 g</td>
+<td>240 g</td>
+</tr>
+<tr>
+<td>Yemas</td>
+<td>2 pza</td>
+<td>5 pza</td>
+</tr>
+<tr>
+<td>Esencia de vainilla</td>
+<td>½ cdita</td>
+<td>1 cdita</td>
+</tr>
+<tr>
+<td>Ralladura de limón</td>
+<td>½ pza</td>
+<td>1 pza</td>
+</tr>
+<tr>
+<td><strong>Relleno y cobertura</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dulce de leche repostero</td>
+<td>250 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Chocolate de cobertura</td>
+<td>200 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>20 g</td>
+<td>50 g</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Batir mantequilla con azúcar glass
+hasta cremar. 2. Agregar yemas de a una, vainilla y ralladura de limón.
+3. Tamizar harina, maicena y polvo para hornear. Incorporar en dos
+partes sin amasar de más. 4. Envolver en film, refrigerar 30 min. 5.
+Estirar a 5 mm, cortar círculos de ~5 cm de diámetro. 6. Hornear a
+170°C, 10–12 min. No deben dorarse — quedan pálidas. 7. Enfriar
+completamente sobre rejilla. 8. Rellenar con dulce de leche, unir pares.
+Refrigerar 15 min para fijar. 9. Fundir chocolate con mantequilla a baño
+maría. 10. Bañar alfajores, dejar solidificar sobre papel encerado.</p>
+<hr />
+<h2 id="de-mesa-chimichurri-y-salsa-criolla">De Mesa — Chimichurri y
+Salsa Criolla</h2>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (~8p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chimichurri</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>1 cabeza</td>
+<td>2 cabezas</td>
+</tr>
+<tr>
+<td>Orégano fresco</td>
+<td>½ atado</td>
+<td>1 atado</td>
+</tr>
+<tr>
+<td>Perejil fresco</td>
+<td>1 atado</td>
+<td>2 atados</td>
+</tr>
+<tr>
+<td>Ají molido seco</td>
+<td>10 g</td>
+<td>20 g</td>
+</tr>
+<tr>
+<td>Pimentón</td>
+<td>10 g</td>
+<td>20 g</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>100 ml</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>200 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Salsa criolla</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Jitomates</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Cebolla blanca</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Morrón rojo</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Pimiento verde</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>½ cabeza</td>
+<td>1 cabeza</td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>¼ atado</td>
+<td>½ atado</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>200 ml</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>100 ml</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="pitch-a-jueces">Pitch a Jueces</h2>
+<ul>
+<li><strong>La abundancia es estructural, no accidental:</strong> cada
+paso suma al anterior con intención. El menú construye un argumento y lo
+cierra.</li>
+<li><strong>Los chinchulines con hervor previo demuestran
+criterio:</strong> más limpios, más crocantes, más digeribles. No es el
+camino fácil — es el correcto.</li>
+<li><strong>La berenjena tatemada es el pivot del menú:</strong> sin ese
+reset ácido y fresco, el doble corte final sería excesivo. Con él, tiene
+sentido y espacio.</li>
+<li><strong>Doble corte justificado:</strong> picaña y costillar no se
+repiten — se responden. Son cortes con tiempos, texturas y sabores
+completamente distintos.</li>
+</ul>
+<hr />
+<h2 id="roll-4-cocineros-6-horas">Roll — 4 Cocineros, 6 Horas</h2>
+<div class="scroll-x"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hora</th>
+<th>C1 — Parrilla</th>
+<th>C2 — Guarniciones</th>
+<th>C3 — Salsas y Fríos</th>
+<th>C4 — Entradas y Achuras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H0:00–H0:30</td>
+<td>Encender fuego, mise en place parrilla</td>
+<td>Mise en place, porcionar papas</td>
+<td>Mise en place, lavar vegetales</td>
+<td>Cortar chinchulines 15-20 cm</td>
+</tr>
+<tr>
+<td>H0:30–H1:00</td>
+<td>Construir brasa amplia, múltiples zonas</td>
+<td>Envolver papas en aluminio</td>
+<td>Iniciar chimichurri. Batir masa alfajores, refrigerar 30 min</td>
+<td>Iniciar hervor chinchulines (agua + leche + laurel)</td>
+</tr>
+<tr>
+<td>H1:00–H2:00</td>
+<td>Colocar costillar a fuego indirecto bajo — crítico</td>
+<td>Colocar papas en parrilla indirecta (45 min)</td>
+<td>Terminar chimichurri, iniciar salsa criolla. Estirar y hornear
+galletas alfajor (170°C, 10–12 min)</td>
+<td>Monitorear hervor chinchulines (1½ h total)</td>
+</tr>
+<tr>
+<td>H2:00–H3:00</td>
+<td>Monitorear costillar, bañar con salmuera</td>
+<td>Retirar papas, hacer puré base</td>
+<td>Terminar salsa criolla, iniciar vinagreta de cerveza. Enfriar
+galletas, rellenar con dulce de leche, bañar chocolate, refrigerar</td>
+<td>Retirar chinchulines, enjuagar, enfriar. Colocar mollejas en
+parrilla (lado 1: 25-30 min)</td>
+</tr>
+<tr>
+<td>H3:00–H4:00</td>
+<td>Verificar costillar</td>
+<td>Terminar puré, mantener caliente</td>
+<td>Terminar vinagreta, mise en place berenjena</td>
+<td>Dar vuelta mollejas (lado 2). Colocar chinchulines en parrilla
+(10-15 min/lado)</td>
+</tr>
+<tr>
+<td>H4:00–H4:30</td>
+<td>Colocar picañas a fuego medio (grasa abajo)</td>
+<td>Mantener puré caliente</td>
+<td>Tatemar berenjenas y lechuga</td>
+<td>Dar vuelta chinchulines. Verificar mollejas</td>
+</tr>
+<tr>
+<td>H4:30–H5:00</td>
+<td>Monitorear picañas, subir temperatura costillar</td>
+<td>—</td>
+<td>Montar ensalada de berenjena</td>
+<td>Colocar chorizos, morcillas, salchichas</td>
+</tr>
+<tr>
+<td>H5:00–H5:15</td>
+<td>Marcar costillar a fuego directo (20 min)</td>
+<td>—</td>
+<td>—</td>
+<td>Servir <strong>Aperitivo</strong> (chorizo, morcilla,
+salchicha)</td>
+</tr>
+<tr>
+<td>H5:15–H5:30</td>
+<td>Monitorear picañas</td>
+<td>—</td>
+<td>Servir salsa criolla</td>
+<td>Servir <strong>Chinchulines + Mollejas</strong></td>
+</tr>
+<tr>
+<td>H5:30–H5:40</td>
+<td>Colocar tuétano (8-12 min)</td>
+<td>—</td>
+<td>—</td>
+<td>Servir <strong>Tuétano</strong></td>
+</tr>
+<tr>
+<td>H5:40–H5:50</td>
+<td>—</td>
+<td>—</td>
+<td>Servir <strong>Ensalada de Berenjena</strong></td>
+<td>Coordinar</td>
+</tr>
+<tr>
+<td>H5:50–H6:00</td>
+<td>Reposar y cortar picañas y costillar</td>
+<td>Servir <strong>Puré rústico</strong></td>
+<td>Salsas de mesa</td>
+<td>Servir <strong>Picaña + Costillar</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<div class="tab-panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3">
+<h1 id="menú-4-el-viajero">Menú 4 — El Viajero</h1>
+<p><strong>Concepto:</strong> Latinoamérica en cuatro paradas. El menú
+empieza en Argentina, cruza el Río de la Plata a Uruguay, sube a los
+Andes peruanos, y vuelve a casa. Cada plato tiene un pasaporte — y el
+regreso, con el costillar austero de siempre, se ve diferente después
+del viaje.</p>
+<hr />
+<h2
+id="aperitivo-choripán-a-la-pomarola-con-chimichurri-verde">Aperitivo —
+Choripán a la Pomarola con Chimichurri Verde</h2>
+<p><strong>Historia:</strong> El viaje empieza en casa. Buenos Aires,
+domingo, disco en el fuego, vino tinto reduciéndose con pimiento y
+cebolla. El choripán a la pomarola es el punto de partida — familiar,
+tuyo, seguro — con el chimichurri verde de cilantro, menta y ralladura
+de cítrico que ya anuncia que este viaje va a tomar caminos distintos al
+de siempre.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Choripán a la pomarola</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Chorizos</td>
+<td>4 pza</td>
+<td>15 pza</td>
+</tr>
+<tr>
+<td>Pimiento rojo</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Pimiento verde</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Cebolla blanca</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>3 dientes</td>
+<td>12 dientes</td>
+</tr>
+<tr>
+<td>Vino tinto</td>
+<td>200 ml</td>
+<td>750 ml</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Pan baguette o flauta</td>
+<td>1 pza</td>
+<td>4 pza</td>
+</tr>
+<tr>
+<td><strong>Chimichurri verde</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>1 atado</td>
+<td>3 atados</td>
+</tr>
+<tr>
+<td>Cilantro</td>
+<td>½ atado</td>
+<td>1½ atados</td>
+</tr>
+<tr>
+<td>Menta fresca</td>
+<td>10 hojas</td>
+<td>30 hojas</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>3 dientes</td>
+<td>10 dientes</td>
+</tr>
+<tr>
+<td>Ralladura de limón</td>
+<td>1 pza</td>
+<td>3 pza</td>
+</tr>
+<tr>
+<td>Ralladura de naranja</td>
+<td>1 pza</td>
+<td>3 pza</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>150 ml</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>300 ml</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Pomarola:</strong> 1. Disco caliente con
+aceite, dorar chorizos por todos lados. Retirar y reservar. 2. Sofreír
+cebolla, pimiento y ajo en el mismo disco hasta transparentar. 3.
+Agregar vino tinto, evaporar alcohol 3–4 min. 4. Regresar chorizos,
+guisar tapado 15–20 min a fuego bajo. 5. Tostar pan en parrilla. Montar
+con pomarola y chimichurri verde al lado.</p>
+<p><strong>Procedimiento — Chimichurri verde:</strong> 1. Picar perejil,
+cilantro, menta y ajo finamente. 2. Mezclar con ralladura de limón y
+naranja, vinagre y aceite. 3. Salpimentar. Refrigerar mínimo 1 h.</p>
+<hr />
+<h2 id="entrada-chivito-uruguayo-de-picaña-ahumada">Entrada — Chivito
+Uruguayo de Picaña Ahumada</h2>
+<p><strong>Historia:</strong> El Río de la Plata se cruza. Montevideo
+tiene una respuesta al choripán: el chivito, el sándwich que lo dice
+todo de una vez — carne, tocino, queso, huevo, lechuga, tomate, todo
+dentro de un pan. Nuestra versión reemplaza el filete por picaña ahumada
+y la mayonesa simple por mayo de chimichurri. El sándwich original es
+uruguayo; lo que lleva adentro cruza de los dos lados del río. Basado en
+receta DEMP Latinoamericana 2026.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (3p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Picaña</td>
+<td>600 g</td>
+<td>2.5 kg</td>
+</tr>
+<tr>
+<td>Pan de chivito o brioche</td>
+<td>3 pza</td>
+<td>15 pza</td>
+</tr>
+<tr>
+<td>Huevo</td>
+<td>3 pza</td>
+<td>15 pza</td>
+</tr>
+<tr>
+<td>Queso gouda en lascas</td>
+<td>120 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Jamón de pierna</td>
+<td>120 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Tocino</td>
+<td>120 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Arúgula</td>
+<td>75 g</td>
+<td>375 g</td>
+</tr>
+<tr>
+<td>Jitomate</td>
+<td>150 g</td>
+<td>750 g</td>
+</tr>
+<tr>
+<td>Rub ahumador</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Viruta para ahumar</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Mayonesa de chimichurri</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Mayonesa</td>
+<td>100 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Chimichurri verde colado</td>
+<td>30 ml</td>
+<td>150 ml</td>
+</tr>
+<tr>
+<td>Jugo de limón</td>
+<td>½ pza</td>
+<td>3 pza</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Aplicar rub en la picaña, reposar
+15 min. 2. Ahumar a fuego indirecto con virutas ~40 min hasta 55°C
+interno. 3. Reposar 10 min, rebanar fino contra la fibra. 4. Dorar
+tocino en parrilla hasta crocante. 5. Huevo estrellado por sándwich. 6.
+Mayonesa de chimichurri: mezclar mayonesa + chimichurri colado + limón.
+7. Tostar pan por la parte interna. 8. Montar: pan con mayo → picaña →
+queso → jamón → tocino → arúgula → jitomate → huevo → pan con mayo.</p>
+<hr />
+<h2
+id="intermedio-coliflor-en-steaks-a-la-brasa-con-ají-amarillo-y-huacatay">Intermedio
+— Coliflor en Steaks a la Brasa con Ají Amarillo y Huacatay</h2>
+<p><strong>Historia:</strong> El viaje sube a los Andes. El ají amarillo
+peruano no pica — perfuma, con un calor frutal que no existe en ninguna
+otra cocina del continente. Estamos muy lejos de Buenos Aires y de
+Montevideo. La coliflor a la brasa carameliza afuera y queda cremosa
+adentro — un vegetal que la parrilla convierte en algo que ningún otro
+método de cocción puede producir. El huacatay, hierba negra de las
+alturas andinas, lo ancla en ese territorio. Después de este plato, el
+regreso va a sentirse merecido.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coliflor grande</td>
+<td>1 pza</td>
+<td>3 pza</td>
+</tr>
+<tr>
+<td>Ají amarillo (o pasta)</td>
+<td>2 pza / 60 g pasta</td>
+<td>6 pza / 180 g pasta</td>
+</tr>
+<tr>
+<td>Crema</td>
+<td>100 ml</td>
+<td>300 ml</td>
+</tr>
+<tr>
+<td>Huacatay fresco (o pasta)</td>
+<td>20 g / 30 g pasta</td>
+<td>60 g / 90 g pasta</td>
+</tr>
+<tr>
+<td>Aceite de oliva</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Limón</td>
+<td>1 pza</td>
+<td>3 pza</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Cortar coliflor en steaks de 2–3
+cm de grosor (corte vertical para mantener unidad). 2. Aceite de oliva,
+sal y pimienta. 3. Fuego directo: 4–5 min por lado hasta marcar bien. 4.
+Si el interior queda crudo, terminar en zona indirecta 5 min. 5. Salsa:
+licuar ají amarillo con crema y huacatay hasta textura lisa.
+Salpimentar, ajustar con limón. 6. Servir steak de coliflor con salsa
+bañada encima o al lado.</p>
+<hr />
+<h2
+id="plato-fuerte-costillar-a-la-parrilla-con-cremoso-de-papa-y-trufa">Plato
+fuerte — Costillar a la Parrilla con Cremoso de Papa y Trufa</h2>
+<p><strong>Historia — Costillar:</strong> El viaje termina donde empezó.
+Después de Uruguay y los Andes, el costillar argentino llega como un
+regreso — austero, sin adornos, sin necesitar nada más que sal y cuatro
+horas de fuego bajo. Es el mismo corte de siempre. Pero después de todo
+lo que hubo antes, se ve diferente.</p>
+<p><strong>Historia — Cremoso:</strong> El viaje cerró con algo simple.
+El cremoso de trufa hace lo mismo: papa, mantequilla, leche, y unas
+gotas de trufa que no gritan sino que terminan. No es el cierre más
+llamativo — es el correcto.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Costillar</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Costillar</td>
+<td>2 kg</td>
+<td>6 kg (2 piezas)</td>
+</tr>
+<tr>
+<td>Agua (salmuera)</td>
+<td>1 lt</td>
+<td>3 lt</td>
+</tr>
+<tr>
+<td>Sal gruesa</td>
+<td>50 g</td>
+<td>150 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>4 dientes</td>
+<td>12 dientes</td>
+</tr>
+<tr>
+<td>Romero</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td><strong>Cremoso de Papa y Trufa</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Papa</td>
+<td>2 kg</td>
+<td>7 kg</td>
+</tr>
+<tr>
+<td>Leche entera</td>
+<td>300 ml</td>
+<td>1 lt</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>200 g</td>
+<td>700 g</td>
+</tr>
+<tr>
+<td>Aceite de trufa</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Sal y pimienta</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento — Costillar:</strong> 1. Salmuera 30 min. Fuego
+indirecto bajo (120–140°C), hueso abajo, 3–4 h. 2. Últimos 20 min: fuego
+directo para marcar. 3. Reposar 10 min, cortar entre costillas.</p>
+<p><strong>Procedimiento — Cremoso:</strong> 1. Cocer papas en agua con
+sal. 2. Calentar leche y mantequilla juntas. 3. Pasar papa caliente por
+prensa. 4. Incorporar mezcla de leche poco a poco. 5. Salpimentar.
+Aceite de trufa al momento del servicio.</p>
+<hr />
+<h2 id="postre-alfajores-de-maicena-con-chocolate">Postre — Alfajores de
+Maicena con Chocolate</h2>
+<p><strong>Historia:</strong> El viaje termina aquí. Después de la
+pomarola de Buenos Aires, el chivito de Montevideo y los Andes peruanos,
+el alfajor dice lo que el costillar ya insinuó: estás en casa. No hay
+ingrediente más rioplatense que la maicena con dulce de leche. El
+viajero vuelve y encuentra esto sobre la mesa — lo mismo de siempre, que
+ahora, después del camino, sabe diferente.</p>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (4p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Galleta</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Harina</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Maicena</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Polvo para hornear</td>
+<td>¾ cdita</td>
+<td>2 cditas</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>130 g</td>
+<td>320 g</td>
+</tr>
+<tr>
+<td>Azúcar glass</td>
+<td>100 g</td>
+<td>240 g</td>
+</tr>
+<tr>
+<td>Yemas</td>
+<td>2 pza</td>
+<td>5 pza</td>
+</tr>
+<tr>
+<td>Esencia de vainilla</td>
+<td>½ cdita</td>
+<td>1 cdita</td>
+</tr>
+<tr>
+<td>Ralladura de limón</td>
+<td>½ pza</td>
+<td>1 pza</td>
+</tr>
+<tr>
+<td><strong>Relleno y cobertura</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Dulce de leche repostero</td>
+<td>250 g</td>
+<td>600 g</td>
+</tr>
+<tr>
+<td>Chocolate de cobertura</td>
+<td>200 g</td>
+<td>500 g</td>
+</tr>
+<tr>
+<td>Mantequilla</td>
+<td>20 g</td>
+<td>50 g</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Procedimiento:</strong> 1. Batir mantequilla con azúcar glass
+hasta cremar. 2. Agregar yemas de a una, vainilla y ralladura de limón.
+3. Tamizar harina, maicena y polvo para hornear. Incorporar en dos
+partes sin amasar de más. 4. Envolver en film, refrigerar 30 min. 5.
+Estirar a 5 mm, cortar círculos de ~5 cm de diámetro. 6. Hornear a
+170°C, 10–12 min. No deben dorarse — quedan pálidas. 7. Enfriar
+completamente sobre rejilla. 8. Rellenar con dulce de leche, unir pares.
+Refrigerar 15 min para fijar. 9. Fundir chocolate con mantequilla a baño
+maría. 10. Bañar alfajores, dejar solidificar sobre papel encerado.</p>
+<hr />
+<h2 id="de-mesa-chimichurri-verde-y-salsa-criolla">De Mesa — Chimichurri
+Verde y Salsa Criolla</h2>
+<div class="scroll-x"><table>
+<thead>
+<tr>
+<th>Ingrediente</th>
+<th>Original (~8p)</th>
+<th>Escalado (15p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chimichurri verde</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>1 atado</td>
+<td>2 atados</td>
+</tr>
+<tr>
+<td>Cilantro</td>
+<td>½ atado</td>
+<td>1 atado</td>
+</tr>
+<tr>
+<td>Menta</td>
+<td>10 hojas</td>
+<td>20 hojas</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>3 dientes</td>
+<td>6 dientes</td>
+</tr>
+<tr>
+<td>Ralladura cítricos</td>
+<td>c/n</td>
+<td>c/n</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>100 ml</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>200 ml</td>
+</tr>
+<tr>
+<td><strong>Salsa criolla</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Jitomates</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Cebolla blanca</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Morrón rojo</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Pimiento verde</td>
+<td>200 g</td>
+<td>400 g</td>
+</tr>
+<tr>
+<td>Ajo</td>
+<td>½ cabeza</td>
+<td>1 cabeza</td>
+</tr>
+<tr>
+<td>Perejil</td>
+<td>¼ atado</td>
+<td>½ atado</td>
+</tr>
+<tr>
+<td>Aceite vegetal</td>
+<td>100 ml</td>
+<td>200 ml</td>
+</tr>
+<tr>
+<td>Vinagre blanco</td>
+<td>50 ml</td>
+<td>100 ml</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="pitch-a-jueces">Pitch a Jueces</h2>
+<ul>
+<li><strong>Narrativa geográfica clara y ejecutada:</strong> Argentina →
+Uruguay → Perú → Argentina. El menú completo cuenta un viaje coherente y
+el regreso tiene significado porque el viaje existió.</li>
+<li><strong>El chivito reinterpretado tiene fundamento:</strong>
+respetamos la receta original del curso (DEMP Latinoamericana 2026) y la
+elevamos con picaña ahumada y mayo de chimichurri. Creatividad con
+raíz.</li>
+<li><strong>La coliflor con ají amarillo es la apuesta más audaz del
+examen:</strong> el único plato que lleva una técnica andina a la
+parrilla. El ají amarillo peruano en este contexto es una decisión que
+pocos tomarían.</li>
+<li><strong>El costillar como cierre austero es una elección:</strong>
+después del viaje, la sencillez no es falta de ideas — es
+confianza.</li>
+</ul>
+<hr />
+<h2 id="roll-4-cocineros-6-horas">Roll — 4 Cocineros, 6 Horas</h2>
+<div class="scroll-x"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Hora</th>
+<th>C1 — Parrilla</th>
+<th>C2 — Guarniciones</th>
+<th>C3 — Salsas y Fríos</th>
+<th>C4 — Entradas y Servicio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H0:00–H0:30</td>
+<td>Encender fuego, zona de ahumado + zona directa</td>
+<td>Mise en place: pelar papas</td>
+<td>Mise en place: lavar hierbas, separar chimichurri y criolla</td>
+<td>Mise en place: aplicar rub a picaña, preparar chorizos</td>
+</tr>
+<tr>
+<td>H0:30–H1:00</td>
+<td>Preparar virutas para ahumado</td>
+<td>Preparar base para cremoso</td>
+<td>Iniciar chimichurri verde. Batir masa alfajores, refrigerar 30
+min</td>
+<td>Reposar picaña con rub 15 min, luego poner a ahumar (~40 min a 55°C
+interno)</td>
+</tr>
+<tr>
+<td>H1:00–H2:00</td>
+<td>Colocar costillar a fuego indirecto bajo — crítico</td>
+<td>Cocer papas para cremoso</td>
+<td>Terminar chimichurri verde, iniciar salsa criolla. Estirar y hornear
+galletas alfajor (170°C, 10–12 min)</td>
+<td>Monitorear ahumado de picaña</td>
+</tr>
+<tr>
+<td>H2:00–H3:00</td>
+<td>Monitorear costillar y verificar temperatura de picaña</td>
+<td>Hacer cremoso, incorporar leche y mantequilla</td>
+<td>Terminar salsa criolla. Enfriar galletas, rellenar con dulce de
+leche, bañar chocolate, refrigerar</td>
+<td>Retirar picaña (55°C interno), reposar, refrigerar para servicio.
+Mise en place chivito</td>
+</tr>
+<tr>
+<td>H3:00–H4:00</td>
+<td>Verificar punto costillar, bañar con salmuera</td>
+<td>Mantener cremoso caliente al baño maría</td>
+<td>Preparar mayo de chimichurri (mezclar + colar)</td>
+<td>Preparar mise en place coliflor: cortar en steaks, condimentar</td>
+</tr>
+<tr>
+<td>H4:00–H4:30</td>
+<td>Monitorear costillar (~3h de cocción)</td>
+<td>Revisar cremoso</td>
+<td>Preparar salsa de ají amarillo y huacatay (licuar)</td>
+<td>Mise en place final chivito: tocino listo, huevos, vegetales
+cortados</td>
+</tr>
+<tr>
+<td>H4:30–H5:00</td>
+<td>Iniciar disco para pomarola (sofreír, guisar chorizos en vino)</td>
+<td>Calentar cremoso para servicio</td>
+<td>Verificar todas las salsas</td>
+<td>Tostar panes, preparar montaje chivito</td>
+</tr>
+<tr>
+<td>H5:00–H5:15</td>
+<td>Monitorear pomarola</td>
+<td>—</td>
+<td>—</td>
+<td>Servir <strong>Choripán a la Pomarola</strong></td>
+</tr>
+<tr>
+<td>H5:15–H5:30</td>
+<td>Dorar tocino en parrilla, hacer huevos estrellados</td>
+<td>—</td>
+<td>—</td>
+<td>Rebanar picaña, montar y servir <strong>Chivito</strong></td>
+</tr>
+<tr>
+<td>H5:30–H5:45</td>
+<td>Marcar steaks de coliflor (4-5 min/lado)</td>
+<td>—</td>
+<td>Servir salsa ají amarillo</td>
+<td>Servir <strong>Coliflor</strong></td>
+</tr>
+<tr>
+<td>H5:45–H6:00</td>
+<td>Subir temperatura costillar, marcar fuego directo 20 min → reposar →
+cortar</td>
+<td>Servir <strong>Cremoso de Papa y Trufa</strong></td>
+<td>Salsas de mesa</td>
+<td>Servir <strong>Costillar</strong></td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+
+<footer>
+  Examen Parrilla 2026 &nbsp;·&nbsp; &#9728; &nbsp;·&nbsp; República Argentina
+</footer>
+
+<script>
+function showTab(n) {
+  document.querySelectorAll('.tab-btn').forEach(function(b, i) {
+    b.setAttribute('aria-selected', i === n ? 'true' : 'false');
+  });
+  document.querySelectorAll('.tab-panel').forEach(function(p, i) {
+    p.classList.toggle('active', i === n);
+  });
+  window.scrollTo(0, 0);
+}
+
+// Mark Historia/Concepto paragraphs without :has()
+document.querySelectorAll('.tab-panel p').forEach(function(p) {
+  var first = p.firstChild;
+  if (first && first.nodeName === 'STRONG') {
+    var t = first.textContent || '';
+    if (t.match(/^(Historia|Concepto)/)) {
+      p.classList.add('historia');
+    }
+  }
+});
+
+// Wrap Roll tables in .roll-table for extra styling
+document.querySelectorAll('.tab-panel h2').forEach(function(h2) {
+  if (h2.textContent.indexOf('Roll') !== -1) {
+    var next = h2.nextElementSibling;
+    if (next && next.classList.contains('scroll-x')) {
+      next.classList.add('roll-table');
+    }
+  }
+});
+</script>
+</body>
+</html>
