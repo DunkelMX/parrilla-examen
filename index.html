@@ -21,6 +21,7 @@
   <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-1" id="tab-1" onclick="showTab(1)">2 — Fuego y Campo</button>
   <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" onclick="showTab(2)">3 — El Festín</button>
   <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" onclick="showTab(3)">4 — El Viajero</button>
+  <button class="tab-btn tab-btn--eval" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4" onclick="showTab(4)">Evaluación</button>
 </nav>
 
 <div class="tab-panel active" id="panel-0" role="tabpanel" aria-labelledby="tab-0">
@@ -2917,5 +2918,150 @@ document.querySelectorAll('.tab-panel h2').forEach(function(h2) {
   toWrap.forEach(function(e) { d.appendChild(e); });
 });
 </script>
+
+<div class="tab-panel" id="panel-4" role="tabpanel" aria-labelledby="tab-4">
+
+<h1 class="eval-title">Evaluación de Menús</h1>
+<p class="eval-subtitle">Ranking basado en tres criterios independientes. Escala 1–5 por criterio (total sobre 15).</p>
+
+<div class="criteria-legend">
+  <div class="criterion-item"><span class="criterion-dot" style="background:var(--celeste)"></span><strong>Calidad</strong> — coherencia, originalidad, selección de ingredientes</div>
+  <div class="criterion-item"><span class="criterion-dot" style="background:var(--gold)"></span><strong>Lógica</strong> — progresión, balance, ritmo, no fatiga el paladar</div>
+  <div class="criterion-item"><span class="criterion-dot" style="background:var(--red)"></span><strong>Técnica</strong> — variedad y dificultad de técnicas demostradas</div>
+</div>
+
+<div class="ranking-list">
+
+  <div class="ranking-card">
+    <div class="ranking-header">
+      <span class="rank-badge">#1</span>
+      <div class="ranking-meta">
+        <span class="ranking-name">El Viajero</span>
+        <span class="ranking-desc">Argentina · Uruguay · Perú · Argentina</span>
+      </div>
+      <span class="ranking-total">14.5<span class="ranking-total-label">/15</span></span>
+    </div>
+    <div class="score-rows">
+      <div class="score-row">
+        <span class="score-label">Calidad</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--celeste" style="width:100%"></div></div>
+        <span class="score-num">5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Lógica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--gold" style="width:100%"></div></div>
+        <span class="score-num">5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Técnica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--red" style="width:90%"></div></div>
+        <span class="score-num">4.5</span>
+      </div>
+    </div>
+    <p class="ranking-summary">La narrativa geográfica crea la coherencia más sólida del examen. El chivito ahumado y la coliflor con ají amarillo son decisiones editoriales valientes. El costillar al final tiene peso porque el viaje existió — sin él, sería solo un cierre conservador.</p>
+    <div class="dish-chips">
+      <span class="chip">Choripán a la pomarola</span><span class="chip">Chivito de picaña ahumada</span><span class="chip">Coliflor con ají amarillo</span><span class="chip">Costillar + cremoso de trufa</span><span class="chip">Alfajores</span>
+    </div>
+  </div>
+
+  <div class="ranking-card">
+    <div class="ranking-header">
+      <span class="rank-badge">#2</span>
+      <div class="ranking-meta">
+        <span class="ranking-name">Fuego y Campo</span>
+        <span class="ranking-desc">La transformación como hilo conductor</span>
+      </div>
+      <span class="ranking-total">14<span class="ranking-total-label">/15</span></span>
+    </div>
+    <div class="score-rows">
+      <div class="score-row">
+        <span class="score-label">Calidad</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--celeste" style="width:90%"></div></div>
+        <span class="score-num">4.5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Lógica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--gold" style="width:90%"></div></div>
+        <span class="score-num">4.5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Técnica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--red" style="width:100%"></div></div>
+        <span class="score-num">5</span>
+      </div>
+    </div>
+    <p class="ranking-summary">El menú técnicamente más completo: ahumado en frío (mozzarella sobre hielo), doble transformación simultánea en el tuétano con calabaza, hervor previo, y costillar con humita norteña. La caprese ahumada reinterpreta un clásico italiano sin traicionarlo.</p>
+    <div class="dish-chips">
+      <span class="chip">Choripán</span><span class="chip">Caprese de tomate ahumado</span><span class="chip">Tuétano + calabaza asada</span><span class="chip">Chinchulines</span><span class="chip">Costillar + cremoso de humita</span><span class="chip">Alfajores</span>
+    </div>
+  </div>
+
+  <div class="ranking-card">
+    <div class="ranking-header">
+      <span class="rank-badge">#3</span>
+      <div class="ranking-meta">
+        <span class="ranking-name">Clásico Austral</span>
+        <span class="ranking-desc">El ritual del fuego</span>
+      </div>
+      <span class="ranking-total">13<span class="ranking-total-label">/15</span></span>
+    </div>
+    <div class="score-rows">
+      <div class="score-row">
+        <span class="score-label">Calidad</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--celeste" style="width:80%"></div></div>
+        <span class="score-num">4</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Lógica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--gold" style="width:100%"></div></div>
+        <span class="score-num">5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Técnica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--red" style="width:80%"></div></div>
+        <span class="score-num">4</span>
+      </div>
+    </div>
+    <p class="ranking-summary">El mejor flujo del examen: cada plato tiene función clara y ninguno pisa al siguiente. El betabel es el único riesgo y lo paga bien. La picaña evaluada sin marinadas ni aderezos — solo dominio del calor — es la declaración más honesta sobre técnica parrillera.</p>
+    <div class="dish-chips">
+      <span class="chip">Choripán</span><span class="chip">Tuétano con aceite ahumado</span><span class="chip">Chinchulines</span><span class="chip">Betabel asado</span><span class="chip">Picaña + cremoso de trufa</span><span class="chip">Alfajores</span>
+    </div>
+  </div>
+
+  <div class="ranking-card">
+    <div class="ranking-header">
+      <span class="rank-badge">#4</span>
+      <div class="ranking-meta">
+        <span class="ranking-name">El Festín</span>
+        <span class="ranking-desc">La abundancia como argumento</span>
+      </div>
+      <span class="ranking-total">12<span class="ranking-total-label">/15</span></span>
+    </div>
+    <div class="score-rows">
+      <div class="score-row">
+        <span class="score-label">Calidad</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--celeste" style="width:80%"></div></div>
+        <span class="score-num">4</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Lógica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--gold" style="width:70%"></div></div>
+        <span class="score-num">3.5</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Técnica</span>
+        <div class="score-bar-track"><div class="score-bar-fill score-bar--red" style="width:90%"></div></div>
+        <span class="score-num">4.5</span>
+      </div>
+    </div>
+    <p class="ranking-summary">Las achuras son el punto más alto del examen. El doble corte (picaña + costillar) es una declaración válida, pero la acumulación de grasa y proteína puede fatigar el paladar antes del plato fuerte. La berenjena tatemada compensa; no resuelve del todo el problema de peso.</p>
+    <div class="dish-chips">
+      <span class="chip">Chorizo + morcilla + salchicha</span><span class="chip">Chinchulines + mollejas</span><span class="chip">Tuétano con aceite ahumado</span><span class="chip">Ensalada de berenjena</span><span class="chip">Picaña + costillar + puré rústico</span><span class="chip">Alfajores</span>
+    </div>
+  </div>
+
+</div><!-- /ranking-list -->
+</div><!-- /panel-4 -->
+
 </body>
 </html>
